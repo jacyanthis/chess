@@ -1,36 +1,44 @@
 require_relative 'display'
 require_relative 'player'
+require 'yaml'
 
-#TODO add player names, retain possible moves in render after piece picked up
 
 class ChessGame
   attr_accessor :board, :display, :players
 
-  def self.pick_mode
-    system 'clear'
-    puts "Select your mode from the following:"
-    puts "1 - Player vs. Player"
-    puts "2 - Player vs. Computer"
-    puts "3 - Computer vs. Computer"
+  def self.load_file
+    puts "Which file would you like to load?"
+    filename = gets.chomp
+    loaded_game = File.open(filename, "r") { |f| YAML::load(f) }
+    loaded_game.run
+  end
+
+  def initialize
+    @board = Board.new
+    @display = Display.new(board, self)
+    @players = pick_mode
+    run
+  end
+
+  def pick_mode
+    display.display_modes
     mode = gets.chomp
     case mode
     when "1"
-      ChessGame.new(:human, :human).run
+      [Human.new(self, display, :blue), Human.new(self, display, :red)]
     when "2"
-      ChessGame.new(:human, :computer).run
+      [Human.new(self, display, :blue), Computer.new(self, display, :red)]
     when "3"
-      ChessGame.new(:computer, :computer).run
+      [Computer.new(self, display, :blue), Computer.new(self, display, :red)]
+    when "4"
+      ChessGame.load_file
     end
   end
 
-  def initialize(player1, player2)
-    @board = Board.new
-    @display = Display.new(board, self)
-    @players = [make_player(player1, :blue), make_player(player2, :red)]
-  end
-
-  def make_player(player, color)
-    player == :human ? Human.new(self, display, color) : Computer.new(self, display, color)
+  def save
+    puts "What filename would you like to use for this save?"
+    filename = gets.chomp
+    File.open(filename, "w") { |f| f.write(self.to_yaml) }
   end
 
   def current_player
@@ -43,7 +51,7 @@ class ChessGame
 
   def run
     turn until game_over?
-    game_over_message
+    display.game_over_message
   end
 
   def turn
@@ -61,13 +69,9 @@ class ChessGame
   end
 
   def game_over?
-    board.won?
+    board.checkmate?(current_color) || board.stalemate?(current_color) ||
+      board.two_kings_left?
   end
-
-  def game_over_message
-    #TODO game over message
-  end
-
 end
 
-ChessGame.pick_mode
+ChessGame.new
