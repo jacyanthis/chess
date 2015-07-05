@@ -1,6 +1,6 @@
 # chess
 
-This is a simple chess game made in Ruby as part of the App Academy curriculum. Run `ruby game.rb` to try it out!
+This is a simple chess game made in Ruby as part of the App Academy curriculum. Run `ruby game.rb` to try it out. My partner in class for this was Ivan Friedman.
 
 Includes:
 
