@@ -64,7 +64,6 @@ class Board
 
   def execute_move(move)
     start, finish = move
-    puts "i am moving from #{start} to #{finish}"
     taken_pieces << self[finish] if occupied?(finish)
     self[finish] = self[start].move(finish)
     self[start] = @sentinel
@@ -90,34 +89,20 @@ class Board
     in_check?(color) && no_valid_moves(color)
   end
 
-  def checkable?(color)
+  def checkables(color)
     all_pieces = grid.flatten.select do |piece|
       piece.color == color
     end
 
     ugly_moves = all_pieces.map do |piece|
-      my_valid_moves = piece.valid_moves.select do |move|
-        puts "my piece is #{piece.class} and my move is #{move}"
+      piece.valid_moves.select do |move|
         duped_board = deep_dup_board
-        puts "my duped board is #{duped_board.object_id} and my original was #{self.object_id}"
         duped_board.execute_move([piece.pos, move])
-        puts "i think i am: #{duped_board.in_check?(opponent_color(color))} (in check)"
         duped_board.in_check?(opponent_color(color))
+      end.map do |move|
+        [piece.pos, move]
       end
-      puts "my valid moves (#{piece}) are #{my_valid_moves}"
-      my_valid_moves
-    end
-
-    puts ugly_moves.to_s
-    if ugly_moves.count > 1
-      flattened = ugly_moves.flatten(1)
-    else
-      flattened = [ugly_moves]
-    end
-    puts flattened.to_s
-    compacted = flattened.compact
-    puts compacted.to_s
-    compacted
+    end.flatten(1)
   end
 
 

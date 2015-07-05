@@ -79,20 +79,17 @@ class Display
     loop do
       render(first_pos)
 
-      if pick_or_place == :pick && board[cursor].valid_moves.empty? && board.occupied?(cursor)
-        puts "Cannot move this piece. (It is either blocked or would leave you in check!)"
+      if game.board.in_check?(game.current_color)
+        puts "#{game.current_color.to_s.capitalize}, you are in CHECK! You must get out of check."
       else
         puts
       end
 
-      if game.board.in_check?(game.current_color)
-        puts "#{game.current_color.to_s.capitalize}, you are in CHECK! You must get out of check."
-      end
-
       if pick_or_place == :pick
-        puts "\n\nPlease select a piece to move, #{game.current_color}."
+        puts "\nPlease select a piece to move, #{game.current_color}."
+        puts
       else
-        puts "\nPlease select a position to move the #{board[first_pos].class}"
+        puts "\nPlease select a position to move the #{board[first_pos].class}."
         puts "To pick up another piece, press 'e'"
       end
       puts ""
@@ -106,8 +103,8 @@ class Display
       end
 
       if command == :return
-        return cursor.dup if pick_or_place == :pick && board[cursor].color == game.current_color ||
-          pick_or_place == :place && board[first_pos].valid_moves.include?(cursor)
+        return cursor.dup if pick_or_place == :pick && board[cursor].color == game.current_color
+        return cursor.dup if pick_or_place == :place && board[first_pos].valid_moves.include?(cursor)
       elsif command == :"\"s\""
         game.save
       elsif command == :"\"e\""

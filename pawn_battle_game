@@ -1,0 +1,260 @@
+--- &3 !ruby/object:ChessGame
+board: &1 !ruby/object:Board
+  sentinel: &2 !ruby/object:EmptySpace {}
+  grid:
+  - - !ruby/object:Rook
+      pos:
+      - 0
+      - 0
+      board: *1
+      color: :red
+    - !ruby/object:Knight
+      pos:
+      - 0
+      - 1
+      board: *1
+      color: :red
+    - !ruby/object:Bishop
+      pos:
+      - 0
+      - 2
+      board: *1
+      color: :red
+    - !ruby/object:Queen
+      pos:
+      - 0
+      - 3
+      board: *1
+      color: :red
+    - !ruby/object:King
+      pos:
+      - 0
+      - 4
+      board: *1
+      color: :red
+    - !ruby/object:Bishop
+      pos:
+      - 0
+      - 5
+      board: *1
+      color: :red
+    - !ruby/object:Knight
+      pos:
+      - 0
+      - 6
+      board: *1
+      color: :red
+    - !ruby/object:Rook
+      pos:
+      - 0
+      - 7
+      board: *1
+      color: :red
+  - - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+  - - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+  - - !ruby/object:Pawn
+      pos:
+      - 3
+      - 0
+      board: *1
+      color: :red
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 3
+      - 1
+      board: *1
+      color: :red
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 3
+      - 2
+      board: *1
+      color: :red
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 3
+      - 3
+      board: *1
+      color: :red
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 3
+      - 4
+      board: *1
+      color: :red
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 3
+      - 5
+      board: *1
+      color: :red
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 3
+      - 6
+      board: *1
+      color: :red
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 3
+      - 7
+      board: *1
+      color: :red
+      moved: true
+  - - !ruby/object:Pawn
+      pos:
+      - 4
+      - 0
+      board: *1
+      color: :blue
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 4
+      - 1
+      board: *1
+      color: :blue
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 4
+      - 2
+      board: *1
+      color: :blue
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 4
+      - 3
+      board: *1
+      color: :blue
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 4
+      - 4
+      board: *1
+      color: :blue
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 4
+      - 5
+      board: *1
+      color: :blue
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 4
+      - 6
+      board: *1
+      color: :blue
+      moved: true
+    - !ruby/object:Pawn
+      pos:
+      - 4
+      - 7
+      board: *1
+      color: :blue
+      moved: true
+  - - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+  - - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+    - *2
+  - - !ruby/object:Rook
+      pos:
+      - 7
+      - 0
+      board: *1
+      color: :blue
+    - !ruby/object:Knight
+      pos:
+      - 7
+      - 1
+      board: *1
+      color: :blue
+    - !ruby/object:Bishop
+      pos:
+      - 7
+      - 2
+      board: *1
+      color: :blue
+    - !ruby/object:Queen
+      pos:
+      - 7
+      - 3
+      board: *1
+      color: :blue
+    - !ruby/object:King
+      pos:
+      - 7
+      - 4
+      board: *1
+      color: :blue
+    - !ruby/object:Bishop
+      pos:
+      - 7
+      - 5
+      board: *1
+      color: :blue
+    - !ruby/object:Knight
+      pos:
+      - 7
+      - 6
+      board: *1
+      color: :blue
+    - !ruby/object:Rook
+      pos:
+      - 7
+      - 7
+      board: *1
+      color: :blue
+  taken_pieces: []
+display: &4 !ruby/object:Display
+  board: *1
+  cursor:
+  - 6
+  - 3
+  game: *3
+players:
+- !ruby/object:Human
+  game: *3
+  display: *4
+  color: :blue
+- !ruby/object:Human
+  game: *3
+  display: *4
+  color: :red

@@ -40,19 +40,14 @@ class Computer < Player
   def get_move
     options = game.board.all_valid_moves(color)
     attackables = options.select {|move| game.board.attackable?(move[1], color)}
-    checkables = game.board.checkable?(color)
+    checkables = game.board.checkables(color)
     display.render
 
     if checkables.length > 0
-      p checkables.to_s
-      puts "The AI is moving!"
-      puts "i found checkables: #{checkables}"
       checkables.sample
     elsif attackables.length > 0
-      puts "The AI is moving!"
       attackables.sample
     else
-      puts "The AI is moving!"
       options.sample
     end
 
