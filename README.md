@@ -4,8 +4,12 @@ This is a simple chess game made in Ruby as part of the App Academy curriculum. 
 
 Includes:
 
--Saving/loading
+- Saving/loading
 
--A fairly stupid greedy AI
+- A fairly stupid greedy AI
 
--No special moves (e.g. castling, pawn promotion)
+- Cursor selection of pieces and moves
+
+- Highlighting of available moves
+
+- Prevents players from putting themselves in check (and forces them to get out if they're in check)
